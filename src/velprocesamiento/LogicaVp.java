@@ -26,10 +26,12 @@ public class LogicaVp {
 	
 	public void paint() {
 		if (start != true) {
-			app.text("Pruebas de Velocidad de procesamiento", app.width/2, app.height/2);
+			app.text("Pruebas Velocidad de procesamiento", app.width/2, app.height/2);
 		} else {
 			if(start == true && gameOver == false)
+				
 				//pintarPrueba
+				
 			if (gameOver == true) {
 				ui.paint();
 				if (ui.getDoneHere() == true) {
@@ -37,6 +39,10 @@ public class LogicaVp {
 				}
 			}
 		}
+	}
+	
+	public void click() {
+		
 	}
 	
 	public void saveData() {

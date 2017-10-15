@@ -3,6 +3,7 @@ import lenguaje.LogicaLenguaje;
 import processing.core.PApplet;
 import processing.data.Table;
 import processing.data.TableRow;
+import velprocesamiento.LogicaVp;
 
 /****************************
  * Esta clase es quien inicializa y corre el applet para probar cada modulo del
@@ -20,6 +21,7 @@ public class Ejecutable extends PApplet {
 	// Atributos/relaciones
 	public Inicio inicio;
 	public LogicaLenguaje logicaLenguaje, logicaLenguaje2;
+	public LogicaVp logicaVp;
 
 	public static void main(String[] args) {
 		PApplet.main("Ejecutable");
@@ -47,7 +49,7 @@ public class Ejecutable extends PApplet {
 				System.out.println("Stage 0 Created");
 			}
 			if (stage == 1) {
-				logicaLenguaje = new LogicaLenguaje(this, table);
+				logicaVp = new LogicaVp(this, table);
 				System.out.println("Stage 1 Created");
 			}
 			if (stage == 2) {
@@ -93,7 +95,7 @@ public class Ejecutable extends PApplet {
 			inicio.paint();
 		}
 		if (stage == 1) {
-			logicaLenguaje.paint();
+			logicaVp.paint();
 		}
 	}
 
@@ -114,7 +116,7 @@ public class Ejecutable extends PApplet {
 			}
 		}
 		if (stage == 1) {
-			if (logicaLenguaje != null && logicaLenguaje.getDataSaved() == true) {
+			if (logicaVp != null && logicaVp.getDataSaved() == true) {
 				stage = 2;
 				newStage = false;
 			}

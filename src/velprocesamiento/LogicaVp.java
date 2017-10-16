@@ -16,6 +16,7 @@ public class LogicaVp {
 	public String tipoInteligencia = "Velocidad Procesamiento";
 	private int correct, ruta;
 	private ArrayList<Patron> patrones;
+	private ArrayList<Bandera> banderas;
 	
 	public LogicaVp(PApplet _app, Table _table) {
 		app = _app;
@@ -26,7 +27,9 @@ public class LogicaVp {
 		correct = 0;
 		ui = new Ui(app);
 		patrones = new ArrayList<Patron>();
+		banderas = new ArrayList<Bandera>();
 		direccionesAvion();
+		databaseFlags();
 		ruta = 0;
 	}
 	
@@ -35,8 +38,9 @@ public class LogicaVp {
 			app.text("Pruebas Velocidad de procesamiento", app.width/2, app.height/2);
 		} else {
 			if(start == true && gameOver == false)
-				paintPlane();
-				paintPaths(ruta);
+				paintFlags();
+				/*paintPlane();
+				paintPaths();*/
 			if (gameOver == true) {
 				ui.paint();
 				if (ui.getDoneHere() == true) {
@@ -46,7 +50,7 @@ public class LogicaVp {
 		}
 	}
 	
-	public void paintPaths(int _bola) {
+	public void paintPaths() {
 		/*AGREGA LAS 6 ELIPSES DE CAMINO A SEGUIR, SI ES DEL MISMO COLOR PUEDE DAR CLICK Y AVANZAR
 		 * DE LO CONTRARIO SE LE PRESENTA OTRO PATRÓN
 		 */
@@ -82,6 +86,40 @@ public class LogicaVp {
 		Patron bola1 = new Patron(app.random(0, 255), app.random(0, 255), app.random(0, 255), app.random(0, 255), app.random(0, 255), app.random(0, 255),app.random(0, 255));
 		patrones.add(bola1);
 		//-----------------------------------------------------------------------
+		start = true;
+	}
+	
+	public void paintFlags() {
+		/*
+		 * AGREGA LAS BANDERAS, TODAS DE UN MISMO COLOR Y 
+		 * UNA DE COLOR DISTINTO
+		 */
+		for (int i = 0; i < banderas.size(); i++) {
+			app.noStroke();
+			app.fill(banderas.get(i).getColor(), 255, 0);
+			app.rect((app.width/2) - 400, (app.height/2), 100, 50);
+			app.fill(banderas.get(i).getColor(), 255, 0);
+			app.rect((app.width/2) - 200, (app.height/2), 100, 50);
+			app.fill(banderas.get(i).getColor(), 255, 0);
+			app.rect((app.width/2), (app.height/2), 100, 50);
+			app.fill(banderas.get(i).getColor(), 255, 0);
+			app.rect((app.width/2) + 200, (app.height/2), 100, 50);
+			app.fill(0, banderas.get(i).getColor(), banderas.get(i).getColor2());
+			app.rect((app.width/2) + 400, (app.height/2), 100, 50);
+		}
+	}
+	
+	public void databaseFlags() {
+		/*
+		 * AGREGAR MÁS CICLOS DE BANDERAS PARA MOSTRARLE A VERGARA
+		 * TAMBIÉN FALTA AGREGAR OPCIONES PARA QUE EL USUARIO ESCOJA LA BANDERA
+		 * QUE PERTENECE O NO AL CICLO MOSTRADO
+		 */
+		Bandera flagBase = new Bandera(app.random(0,255), app.random(0,255));
+		
+		banderas.add(flagBase);
+		
+		//CONDICIÓN DE INICIO
 		start = true;
 	}
 	

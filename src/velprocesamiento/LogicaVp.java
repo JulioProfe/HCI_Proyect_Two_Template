@@ -35,6 +35,7 @@ public class LogicaVp {
 			app.text("Pruebas Velocidad de procesamiento", app.width/2, app.height/2);
 		} else {
 			if(start == true && gameOver == false)
+				paintPlane();
 				paintPaths(ruta);
 			if (gameOver == true) {
 				ui.paint();
@@ -46,28 +47,47 @@ public class LogicaVp {
 	}
 	
 	public void paintPaths(int _bola) {
-		app.fill(patrones.get(_bola).getColor());
-		app.ellipse(20, 20, 100, 500);
+		/*AGREGA LAS 6 ELIPSES DE CAMINO A SEGUIR, SI ES DEL MISMO COLOR PUEDE DAR CLICK Y AVANZAR
+		 * DE LO CONTRARIO SE LE PRESENTA OTRO PATRÓN
+		 */
+		for (int i = 0; i < patrones.size(); i++) {
+			app.fill(patrones.get(i).getColor(), 255, 0);
+			app.ellipse((app.width/2) + 450, (app.height/2) - 300, 50, 50);
+			app.fill(patrones.get(i).getColor2() + 10, 255, 0);
+			app.ellipse((app.width/2) + 450, (app.height/2) - 200, 50, 50);
+			app.fill(patrones.get(i).getColor3() + 20, 255, 0);
+			app.ellipse((app.width/2) + 450, (app.height/2) - 100, 50, 50);
+			app.fill(patrones.get(i).getColor4() + 30, 255, 0);
+			app.ellipse((app.width/2) + 450, (app.height/2), 50, 50);
+			app.fill(patrones.get(i).getColor5() + 40, 255, 0);
+			app.ellipse((app.width/2) + 450, (app.height/2) + 100, 50, 50);
+			app.fill(patrones.get(i).getColor6() + 50, 255, 0);
+			app.ellipse((app.width/2) + 450, (app.height/2) + 200, 50, 50);
+			app.fill(patrones.get(i).getColor7() + 60, 255, 0);
+			app.ellipse((app.width/2) + 450, (app.height/2) + 300, 50, 50);
+		}
+	}
+	
+	public void paintPlane() {
+		app.fill(100, 255, 0);
+		app.noStroke();
+		app.rect( app.width/6, (app.height / 2), 50, 50);
 	}
 	
 	public void direccionesAvion() {
 		System.out.println("Create Paths for the Plane");
-		Patron bola1 = new Patron(app.random(0, 255));
-		Patron bola2 = new Patron(app.random(0, 255));
-		Patron bola3 = new Patron(app.random(0, 255));
-		Patron bola4 = new Patron(app.random(0, 255));
-		Patron bola5 = new Patron(app.random(0, 255));
-		
+		/*---------------------------
+		 * PATRÓN 1, agregado de manera toche :)
+		 */
+		Patron bola1 = new Patron(app.random(0, 255), app.random(0, 255), app.random(0, 255), app.random(0, 255), app.random(0, 255), app.random(0, 255),app.random(0, 255));
 		patrones.add(bola1);
-		patrones.add(bola2);
-		patrones.add(bola3);
-		patrones.add(bola4);
-		patrones.add(bola5);
-		
+		//-----------------------------------------------------------------------
 		start = true;
 	}
 	
 	public void click() {
+		
+		//VALIDACIÓN DEL CLICK CORRECTO JAIME
 		
 	}
 	

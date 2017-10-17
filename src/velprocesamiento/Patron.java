@@ -1,45 +1,73 @@
 package velprocesamiento;
 
+import processing.core.PApplet;
+
 public class Patron {
-	
-	private float color, color2, color3, color4, color5, color6, color7;
-	
-	public Patron(float _color, float _color2, float _color3, float _color4, float _color5, float _color6, float _color7) {
-		color = _color;
-		color2 = _color2;
-		color3 = _color3;
-		color4 = _color4;
-		color5 = _color5;
-		color6 = _color6;
-		color7 = _color7;
+
+	private int contador;
+	private int r, g, b;
+	private PApplet app;
+
+	public Patron(PApplet app) {
+		this.app = app;
+		contador = (int) app.random(6);
+
+		switch (contador) {
+		case 0: // RED
+			r = 255;
+			g = 0;
+			b = 0;
+
+			break;
+
+		case 1: // GREEN
+			r = 0;
+			g = 255;
+			b = 0;
+
+			break;
+
+		case 2: // BLUE
+			r = 0;
+			g = 0;
+			b = 255;
+
+			break;
+
+		case 3: // YELLOW
+			r = 255;
+			g = 255;
+			b = 0;
+
+			break;
+
+		case 4: // ORANGE
+			r = 255;
+			g = 170;
+			b = 0;
+
+			break;
+
+		case 5: // PURPLE
+			r = 255;
+			g = 0;
+			b = 255;
+
+			break;
+
+		}
 	}
 
-	public float getColor() {
-		return color;
+	public int getR() {
+		return r;
 	}
 
-	public float getColor2() {
-		return color2;
+	public int getG() {
+		return g;
 	}
 
-	public float getColor3() {
-		return color3;
-	}
-
-	public float getColor4() {
-		return color4;
-	}
-
-	public float getColor5() {
-		return color5;
-	}
-
-	public float getColor6() {
-		return color6;
-	}
-	
-	public float getColor7() {
-		return color7;
+	public int getB() {
+		return b;
 	}
 
 }

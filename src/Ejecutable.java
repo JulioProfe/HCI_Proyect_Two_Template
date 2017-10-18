@@ -129,7 +129,7 @@ public class Ejecutable extends PApplet {
 			inicio.click();
 		}
 		if (stage == 1) {
-			logicaLenguaje.click();
+			logicaVp.click();
 		}
 	}
 }

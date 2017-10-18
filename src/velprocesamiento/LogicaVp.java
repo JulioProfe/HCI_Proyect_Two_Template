@@ -45,12 +45,17 @@ public class LogicaVp {
 		} else {
 			if (start == true && gameOver == false) {
 				// paintFlags();
-				// paintPlane();
-				if (crono.getSec() > 3) {  // CADA 3 SEGUNDOS SE REINICIA EL PATRÓN
-					crono.resetTime(); 
+				paintPlane();
+				if (crono.getSec() > 3) { // CADA 3 SEGUNDOS SE REINICIA EL
+											// PATRÓN
+					crono.resetTime();
 					restartPath();
 				}
 				paintPaths();
+				app.textSize(20);
+				app.fill(0);
+				app.text("puntaje: "+correct, 150, 150);
+				app.noFill();
 			}
 			System.out.println("tiempo: " + crono.getSec());
 			if (gameOver == true) {
@@ -60,6 +65,30 @@ public class LogicaVp {
 				}
 			}
 		}
+	}
+
+	private void validacion(int mX, int mY) {
+		app.loadPixels();
+		for (int x = 0; x < app.width; x++) {
+			for (int y = 0; y < app.height; y++) {
+				int mouseP = mX + mY * app.width; // PIXEL QUE CORREXPONDE A LA POS DEL MOUSE
+				//VALORES DE COLOR DEL PIXEL DEL ARRAY
+				int r = colorPlane.getR();
+				int g = colorPlane.getG();
+				int b = colorPlane.getB();
+				
+				// VALORES DE COLOR DEL PIXEL QUE CORRESPONDE A LA POS DEL MOUSE
+				int rM = (int)app.red(app.pixels[mouseP]);
+				int gM = (int)app.green(app.pixels[mouseP]);
+				int bM = (int)app.blue(app.pixels[mouseP]);
+				// VALIDACIÓN DE QUE LOS COLORES SEAN LOS MISMOS
+				
+				if ((r==rM) && (g==gM) && (b==bM)) {
+					restartPath();
+				}
+			}
+		}
+		app.updatePixels();
 	}
 
 	private void restartPath() {
@@ -116,8 +145,8 @@ public class LogicaVp {
 		/*---------------------------
 		 * PATRÓN 1 
 		 */
-		Patron bola1 = new Patron(app);
-		patrones.add(bola1);
+		Patron avioncito = new Patron(app);
+		patrones.add(avioncito);
 		// -----------------------------------------------------------------------
 		start = true;
 	}
@@ -158,7 +187,8 @@ public class LogicaVp {
 	public void click() {
 
 		// VALIDACIÓN DEL CLICK CORRECTO JAIME
-
+		
+		validacion(app.mouseX, app.mouseY);
 	}
 
 	public void saveData() {

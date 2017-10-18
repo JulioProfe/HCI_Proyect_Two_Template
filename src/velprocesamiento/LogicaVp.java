@@ -15,9 +15,10 @@ public class LogicaVp {
 	private Table table;
 	public String tipoInteligencia = "Velocidad Procesamiento";
 	private int correct, ruta;
-	private Patron colorPlane; 
+	private Patron colorPlane;
 	private ArrayList<Patron> patrones;
 	private ArrayList<Bandera> banderas;
+	private Cronometro crono;
 
 	public LogicaVp(PApplet _app, Table _table) {
 		app = _app;
@@ -33,17 +34,25 @@ public class LogicaVp {
 		direccionesAvion();
 		databaseFlags();
 		ruta = 0;
-		colorPlane= new Patron(app);
+		colorPlane = new Patron(app);
+		crono = new Cronometro(app);
+		crono.setCorriendo(true);
 	}
 
 	public void paint() {
 		if (start != true) {
 			app.text("Pruebas Velocidad de procesamiento", app.width / 2, app.height / 2);
 		} else {
-			if (start == true && gameOver == false)
+			if (start == true && gameOver == false) {
 				// paintFlags();
-				paintPlane();
-			paintPaths();
+				// paintPlane();
+				if (crono.getSec() > 3) {  // CADA 3 SEGUNDOS SE REINICIA EL PATRÓN
+					crono.resetTime(); 
+					restartPath();
+				}
+				paintPaths();
+			}
+			System.out.println("tiempo: " + crono.getSec());
 			if (gameOver == true) {
 				ui.paint();
 				if (ui.getDoneHere() == true) {
@@ -51,6 +60,11 @@ public class LogicaVp {
 				}
 			}
 		}
+	}
+
+	private void restartPath() {
+		patrones.removeAll(patrones);
+		createPaths();
 	}
 
 	private void createPaths() {
@@ -90,7 +104,7 @@ public class LogicaVp {
 	}
 
 	public void paintPlane() {
-		app.fill(colorPlane.getR(),colorPlane.getG(),colorPlane.getB());
+		app.fill(colorPlane.getR(), colorPlane.getG(), colorPlane.getB());
 		app.noStroke();
 		app.rect(app.width / 6, (app.height / 2), 50, 50);
 		app.noFill();
@@ -100,7 +114,7 @@ public class LogicaVp {
 	public void direccionesAvion() {
 		System.out.println("Create Paths for the Plane");
 		/*---------------------------
-		 * PATRÓN 1, agregado de manera toche :)
+		 * PATRÓN 1 
 		 */
 		Patron bola1 = new Patron(app);
 		patrones.add(bola1);

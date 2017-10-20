@@ -132,4 +132,16 @@ public class Ejecutable extends PApplet {
 			logicaVp.click();
 		}
 	}
+	
+	public void keyPressed(){
+		if (stage == 1) {
+			logicaVp.key();
+		}
+	}
+	
+	public void mouseReleased() {
+		if (stage == 1) {
+		logicaVp.mReleased();
+		}
+	}
 }
